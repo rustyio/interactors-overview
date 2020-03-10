@@ -13,9 +13,10 @@ class MyView(viewsets.GenericViewSet):
     def create(self, request, *args, **kwargs):
         # VIEW LOGIC
         user_id = kwargs.get("user_id")
+        donation_amount = kwargs.get("donation_amount")
         # END VIEW LOGIC
         try:
-            job = MakeLastnameUppercase(user_id)
+            job = MakeLastnameUppercase(user_id, donation_amount)
             if job.run():
                 # Send the response.
                 pass

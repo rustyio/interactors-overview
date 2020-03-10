@@ -29,14 +29,13 @@ class MakeLastnameUppercase():
             raise DonationTooSmallError("...") 
  
     def run(self): 
-        mixpanel.fire(event="make_lastname_uppercase", { 'user_id': self.user.id }) 
- 
-        # Convert last name to uppercase. 
-        self.user.last_name = self._to_upper(self.user.last_name)
-
         # Charge the user.
         stripe.charge(self.donation_amount, self.user.stripe_customer_id)
         Transaction(user=self.user, amount=self.donation_amount).save()
+
+        # Convert last name to uppercase. 
+        self.user.last_name = self._to_upper(self.user.last_name)
+        self.user.save()
  
         # Send a confirmation email. 
         mailer.send(template="make_lastname_uppercase", self.user) 

@@ -16,3 +16,7 @@ class VerbAdjectiveNoun():
         # Raise errors if necessary.
         # Do business logic.
         return True
+
+    @classmethod
+    def _private_method(self, some_data):
+        return other_data

@@ -26,7 +26,7 @@ class TestMakeLastnameUppercase(unittest.TestCase):
         
     @mock.patch("services.stripe")
     def test_user_gets_charged(self, mock_stripe):
-        CLS(self.user.id, 600)
+        CLS(self.user.id, 600).run()
         mock_stripe.charge.assert_called_with(600, self.user.stripe_customer_id)
 
 if __name__ == '__main__':
